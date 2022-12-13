@@ -1,0 +1,704 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Pixeled;
+    user-select: none;
+}
+
+/*
+DFD
+Diagrama de Flujo de Datos
+*/
+
+:root {
+    --p1: #fff;
+    --p2: #7bd7e2;
+    --p3: #af61e0;
+    --p4: #70b445;
+    --p5: #c85a12;
+    --food: #ecec57;
+}
+
+@font-face {
+    font-family: Pixeled;
+    src: url('./fonts/pixeled/Pixeled.ttf') format('truetype');
+    font-style: normal;
+    font-weight: normal;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation-duration: 3s;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+    background-color: #000;
+    overflow: hidden;
+}
+
+.musicButton {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    top: 20px;
+    right: 10px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color:#dd3;
+    font-size: 40px;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.musicButton span {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    top: -105%;
+    left: -5%;
+    visibility: hidden;
+}
+
+.musicButton span.show {
+    visibility: visible;
+}
+
+.menu {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    display: none;
+}
+
+.copyright {
+    position: absolute;
+    bottom: 10px;
+    left: 20px;
+    color: #fff;
+    font-size: 14px;
+    pointer-events: none;
+}
+
+.menu > article {
+    width: 50%;
+    height: 80%;
+    max-width: 500px;
+    max-height: 850px;
+    display: none;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 5% 0;
+}
+
+.show,
+.gameScreen.show,
+.pause.show {
+    display: block;
+}
+
+.menu > article.show,
+.gameOver.show {
+    display: flex;
+}
+
+.menu > article.show {
+    animation: showEffect 1s linear forwards;
+}
+
+.menu > article > *.hidden { 
+    display: none;
+}
+
+.menu > article > button {
+    width: 75%;
+    height: 12.5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    left: 50%;
+    font-size: 22px;
+    letter-spacing: 5px;
+    background-color: #dd3;
+    border: 4px solid #550;
+    cursor: pointer;
+    transition: background-color .5s, border .5s;
+    color: #000;
+    animation-duration: 3s;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+    transform: translate(-50%, -50%);
+}
+
+.menu > article > button:hover  {
+    background-color: #991;
+    border: 5px solid #770;
+}
+
+.mainMenu > button:nth-child(1) {
+    top: 12.5%;
+}
+
+
+.mainMenu > button:nth-child(2){
+    position: absolute;
+    top: 50%;
+}
+
+.mainMenu > button:nth-child(3){
+    position: absolute;
+    top: 87.5%;
+}
+
+.playMenu > button:nth-child(1) {
+    top: 12.5%;
+}
+
+.playMenu > button:nth-child(2) {
+    top: 27.5%;
+}
+
+.playMenu > button:nth-child(3) {
+    top: 42.5%;
+}
+
+.playMenu > button:nth-child(4) {
+    top: 57.5%;
+}
+
+.playMenu > button:nth-child(5) {
+    top: 72.5%;
+}
+
+.playMenu > button:nth-child(6) {
+    top: 87.5%;
+}
+
+.configMenu button.buttonBack {
+    top: 87.5%;
+}
+
+.configMenu {
+    position: relative;
+}
+
+.configMenu .languajeButton {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    text-align: center;
+    background-color: #dd3;
+    border: 2px solid #550;
+    text-shadow: 1px 1px #000;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.configMenu .languajeButton:hover  {
+    background-color: #991;
+    border: 5px solid #770;
+}
+
+.configMenu > div {
+    width: 100%;
+    height: 30%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    position: absolute;
+    transform: translateY(-17.5%);
+}
+
+.configMenu > div:nth-child(1) {
+    top: 12.5%;
+}
+
+.configMenu > div:nth-child(2) {
+    top: 50%;
+}
+
+.configMenu > div span {
+    color: #fff;
+}
+
+.configMenu > div > div {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.configMenu > div > div > button {
+    width: 10%;
+    height: 30%;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    transition: .5s;
+}
+
+.configMenu > div > div > button:nth-child(1) {
+    background-image: url('./images/left\ arrow.png');
+    animation: arrowLeftAnimation 2s linear infinite;
+}
+
+.configMenu > div > div > button:nth-child(3) {
+    background-image: url('./images/right\ arrow.png');
+    animation: arrowRightAnimation 2s linear infinite;
+}
+
+.configMenu > div > div > div  {
+    width: 31%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.configMenu > div > div > div > span {
+    position: absolute;
+    top: 200%;
+    left: 200%;
+    transform: translate(-50%, -50%);
+}
+
+.configMenu > div > div > div > span.selected {
+    top: 50%;
+    left: 50%;
+}
+
+.menu .controlsMenu {
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 10px;
+}
+
+.playerControlsContainer {
+    width: 40%;
+    height: 18%;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    text-align: center;
+    position: absolute;
+}
+
+.playerControlsContainer:nth-child(1) {
+    top: 5%;
+    left: 5%;
+}
+
+.playerControlsContainer:nth-child(2) {
+    top: 5%;
+    right: 5%;
+}
+
+.playerControlsContainer:nth-child(3) {
+    top: 50%;
+    left: 5%;
+}
+
+.playerControlsContainer:nth-child(4) {
+    top: 50%;
+    right: 5%;
+}
+
+.playerControlsContainer:nth-child(5) {
+    position: absolute;
+    top: 27.5%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.playerControls {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.playerControlsContainer:nth-child(1) .playerNameControls,
+.playerControlsContainer:nth-child(1) span {
+    text-shadow: 1px 1px #000;
+    color: var(--p2);
+}
+
+.playerControlsContainer:nth-child(2) .playerNameControls,
+.playerControlsContainer:nth-child(2) span {
+    text-shadow: 1px 1px #000;
+    color: var(--p3);
+}
+
+.playerControlsContainer:nth-child(3) .playerNameControls,
+.playerControlsContainer:nth-child(3) span {
+    text-shadow: 1px 1px #000;
+    color: var(--p4);
+}
+
+.playerControlsContainer:nth-child(4) .playerNameControls,
+.playerControlsContainer:nth-child(4) span {
+    text-shadow: 1px 1px #000;
+    color: var(--p5);
+}
+
+.playerControlsContainer:nth-child(5) .playerNameControls,
+.playerControlsContainer:nth-child(5) span {
+    text-shadow: 1px 1px #000;
+    color: var(--p1);
+}
+
+.playerControls span {
+    width: 26%;
+    height: 52%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    background-color: #dd3;
+    border: 2px solid #550;
+    color: #000;
+}
+
+.playerControls span:nth-child(2) {
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.playerControls span:nth-child(1),
+.playerControls span:nth-child(3),
+.playerControls span:nth-child(4) {
+    bottom: -10%;
+}
+
+.playerControls span:nth-child(1) {
+    left: 20%;
+    transform: translateX(-50%);
+}
+
+
+.playerControls span:nth-child(3) {
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+
+.playerControls span:nth-child(4) {
+    left: 80%;
+    transform: translateX(-50%);
+}
+
+.menu .controlsMenu .buttonBack {
+    position: absolute;
+    top: 87.5%;
+}
+
+.gameScreen {
+    width: 100%;
+    height: 100%;
+    display: none;
+    position: absolute;
+    pointer-events: none;
+}
+
+.escText {
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    color: #fff;
+    font-size: 14px;
+}
+
+.escText .key {
+    width: 50px;
+    height: 50px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #dd3;
+    border: 2px solid #550;
+    text-shadow: 1px 1px #000;
+}
+
+.gameContainer {
+    width: 80%;
+    height: 80%;
+    max-width: 840px;
+    max-height: 840px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: solid #f00;
+}
+
+.pause,
+.gameOver {
+    width: 100%;
+    height: 100%;
+    display: none;
+    position: absolute;
+    background-color: #000a;
+}
+
+.content {
+    width: 75%;
+    height: 50%;
+    max-width: 500px;
+    max-height: 850px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    padding: 5% 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 3px solid #00f;
+    background-color: #f003;
+    animation-name: none;
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+}
+
+.hidden .content {
+    background: transparent;
+    border: none;
+}
+
+.content button {
+    width: 75%;
+    height: 17.5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    background-color: #dd3;
+    border: 4px solid #550;
+    transition: all .5s;
+    cursor: pointer;
+    animation-duration: 3s;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+}
+
+.content button:hover {
+    background-color: #991;
+    border: 5px solid #770;
+}
+
+.pause .content button:nth-child(1) {
+    top: 10%;
+}
+
+.pause .content button:nth-child(2) {
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.pause .content button:nth-child(3) {
+    top: 72.5%;
+}
+
+.content button.hidden {
+    display: none;
+}
+
+.gameOver .content button:nth-child(1) {
+    top: 20%;
+}
+
+.gameOver .content button:nth-child(2) {
+    top: 62.5%;
+}
+
+.cell {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 8px;
+    background-color: #000;
+    border: .5px solid #00f;
+}
+
+.p1 {
+    background-color: var(--p1);
+}
+
+.p2 {
+    background-color: var(--p2);
+}
+
+.p3 {
+    background-color: var(--p3);
+}
+
+.p4 {
+    background-color: var(--p4);
+}
+
+.p5 {
+    background-color: var(--p5);
+}
+
+.food {
+    background-color: var(--food);
+}
+
+
+@keyframes buttonClickEffect {
+    from {
+        opacity: 1;
+        background-color: #dd3;
+        pointer-events: none;
+        z-index: 10;
+    }
+
+    25% {
+        border-radius: 50%;
+    }
+
+    50% {
+        width: 200vw;
+        height: 200vh;
+    }
+
+    75% {
+        opacity: 1;
+    }
+
+    to {
+        width: 200vw;
+        height: 200vh;
+        opacity: 0;
+        pointer-events: none;
+        z-index: 10;
+    }
+}
+
+@keyframes buttonClickEffect2 {
+    from {
+        transform: scale(1) rotateZ(0);
+        pointer-events: none;
+    }
+
+    75% {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+        transform: scale(100) rotateZ(720deg);
+        pointer-events: none;
+    }
+}
+
+@keyframes showEffect {
+    from {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    to {
+        opacity: 1;
+        pointer-events: all;
+    }
+}
+
+@keyframes fadeDown {
+    from {
+        top: 0;
+        transform: translate(-50%, -100%);
+    }
+
+    to {
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+}
+
+@keyframes fadeUp {
+    from {
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    to {
+        top: 0;
+        transform: translate(-50%, -100%);
+    }
+}
+
+@keyframes darken {
+    from {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes arrowLeftAnimation {
+    from {
+        transform: translateX(10px);
+    }
+
+    50% {
+        transform: translateX(-10px);
+    }
+
+    to {
+        transform: translateX(10px);
+    }
+}
+
+@keyframes arrowRightAnimation {
+    from {
+        transform: translateX(-10px);
+    }
+
+    50% {
+        transform: translateX(10px);
+    }
+
+    to {
+        transform: translateX(-10px);
+    }
+}

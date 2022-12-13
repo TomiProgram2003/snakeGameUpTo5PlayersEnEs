@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang='es'>
+
+
+<head>
+    <!-- Title -->
+    <title>Snake's Game up to PLayers (en/es)</title>
+    <!-- Meta -->
+    <meta charset='UTF-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <!-- CSS -->
+    <link rel='stylesheet' href='./style.css'>
+    <!-- JS -->
+    <script src='./languaje.js' defer></script>
+    <script src='./collisionsController.js' defer></script>
+    <script src='./food.js' defer></script>
+    <script src='./player.js' defer></script>
+    <script src='./cell.js' defer></script>
+    <script src='./matrixController.js' defer></script>
+    <script src='./game.js' defer></script>
+    <script src='./main.js' defer></script>
+    <!-- IonIcons -->
+    <script type='module' src='https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js'></script>
+    <script nomodule src='https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js'></script>
+</head>
+
+
+<body>
+
+    <audio src='./music/music.mp3' type='audio/mpeg'></audio>
+
+    <button class='musicButton'>
+        <span class='activated'><ion-icon name='volume-high-outline'></ion-icon></span>
+        <span class='disabled show'><ion-icon name='volume-mute-outline'></ion-icon></span>
+    </button>
+
+    <section class='menu show'>
+        <article class='mainMenu show'>
+            <button class='playButton' txtID='0'></button>
+            <button class='configButton' txtID='1'></button>
+            <button class='controlsButton' txtID='2'></button>
+        </article>
+
+        <article class='playMenu'>
+            <button players='1' class='playerButton'>1 <span txtID='3'></span></button>
+            <button players='2' class='playerButton'>2 <span txtID='4'></span></button>
+            <button players='3' class='playerButton'>3 <span txtID='4'></span></button>
+            <button players='4' class='playerButton'>4 <span txtID='4'></span></button>
+            <button players='5' class='playerButton'>5 <span txtID='4'></span></button>
+            <button class='buttonBack' txtID='5'></button>
+        </article>
+
+        <article class='configMenu'>
+            <span class='languajeButton'txtID='17'></span>
+            <div class='mapSizeContainer'>
+                <span class='text' txtID='6'></span>
+                <div class='mapSizeControl'>
+                    <button class='mapSizeLeftButton'></button>
+                    <div class='mapSizes'>
+                        <span class='mapSize big selected' txtID='7'></span>
+                        <span class='mapSize normal' txtID='8'></span>
+                        <span class='mapSize little' txtID='9'></span>
+                    </div>
+                    <button class='mapSizeRightButton'></button>
+                </div>
+            </div>
+
+            <div class='velocityContainer'>
+                <span class='text' txtID='10'></span>
+                <div class='velocityControl'>
+                    <button class='velocityLeftButton'></button>
+                    <div class='velocities'>
+                        <span class='velocity normal selected' txtID='8'></span>
+                        <span class='velocity fast' txtID='11'></span>
+                        <span class='velocity flash' txtID='12'></span>
+                    </div>
+                    <button class='velocityRightButton'></button>
+                </div>
+            </div>
+            
+            <button class='buttonBack' txtID='5'></button>
+        </article>
+
+        <article class='controlsMenu'>
+            <div class='playerControlsContainer'>
+                <p class='playerNameControls'><span txtID='3'></span> 2:</p>
+                <div class='playerControls'>
+                    <span class='playerControlLeft'>A</span>
+                    <span class='playerControlUp'>W</span>
+                    <span class='playerControlDown'>S</span>
+                    <span class='playerControlRight'>D</span>
+                </div>
+            </div>
+
+            <div class='playerControlsContainer'>
+                <p class='playerNameControls'><span txtID='3'></span> 3:</p>
+                <div class='playerControls'>
+                    <span class='playerControlLeft'>F</span>
+                    <span class='playerControlUp'>T</span>
+                    <span class='playerControlDown'>G</span>
+                    <span class='playerControlRight'>H</span>
+                </div>
+            </div>
+
+            <div class='playerControlsContainer'>
+                <p class='playerNameControls'><span txtID='3'></span> 4:</p>
+                <div class='playerControls'>
+                    <span class='playerControlLeft'>J</span>
+                    <span class='playerControlUp'>I</span>
+                    <span class='playerControlDown'>K</span>
+                    <span class='playerControlRight'>L</span>
+                </div>
+            </div>
+
+            <div class='playerControlsContainer'>
+                <p class='playerNameControls'><span txtID='3'></span> 5:</p>
+                <div class='playerControls'>
+                    <span class='playerControlLeft'>4</span>
+                    <span class='playerControlUp'>8</span>
+                    <span class='playerControlDown'>2</span>
+                    <span class='playerControlRight'>6</span>
+                </div>
+            </div>
+
+            <div class='playerControlsContainer'>
+                <p class='playerNameControls'><span txtID='3'></span> 1:</p>
+                <div class='playerControls'>
+                    <span class='playerControlLeft'>&larr;</span>
+                    <span class='playerControlUp'>&uarr;</span>
+                    <span class='playerControlDown'>&darr;</span>
+                    <span class='playerControlRight'>&rarr;</span>
+                </div>
+            </div>
+            
+            <button class='buttonBack' txtID='5'></button>
+        </article>
+
+        <p class='copyright' txtID='13'></p>
+    </section>
+
+    <section class='gameScreen'>
+        <p class='escText' HTMLCode txtID='14'></p>
+        <div class='gameContainer'></div>
+        <p class='copyright' txtID='13'></p>
+    </section>
+
+    <section class='pause'>
+        <div class='content'>
+            <button class='returnButton' txtID='5'></button>
+            <button class='restartButton' txtID='15'></button>
+            <button class='homeButton' txtID='16'></button>
+        </div>
+    </section>
+
+    <section class='gameOver'>
+        <div class='content'>
+            <button class='restartButton' txtID='15'></button>
+            <button class='homeButton' txtID='16'></button>
+        </div>
+    </section>
+    
+</body>
+
+
+</html>
